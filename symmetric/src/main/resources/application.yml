@@ -1,0 +1,23 @@
+spring:
+  data:
+    mongodb:
+      uri:
+server:
+  port: 8081
+core:
+  symmetric:
+    security:
+      cipher:
+        type: AES/CBC/PKCS5Padding
+        provider: SunJCE
+        key: AD9876CB1253GHEF
+        iv: 9ZH8R37765H15R5C
+        algorithm:
+          type: AES
+  asymmetric:
+    security:
+      cipher:
+        type: RSA/ECB/PKCS1Padding
+      keyPairGenerator:
+        type: RSA
+        size: 1024
