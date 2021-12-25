@@ -4,11 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.framework.rodolfo.freire.git.encryption.asymmetric.document.Message;
 import org.framework.rodolfo.freire.git.encryption.asymmetric.repository.MessageRepository;
 import org.framework.rodolfo.freire.git.encryption.core.component.EncryptComponent;
-import org.framework.rodolfo.freire.git.encryption.core.factory.EnumFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.framework.rodolfo.freire.git.encryption.core.factory.EnumFactory.ASYMMETRIC;
 
 @Slf4j
 @Service
@@ -26,7 +27,7 @@ public class MessageService {
     public List<Message> findAll() {
         List<Message> messageList = new ArrayList<>();
         for (Message p : repository.findAll()) {
-            encryptComponent.decryptObject(p, EnumFactory.ASYMMETRIC);
+            encryptComponent.decryptObject(p, ASYMMETRIC);
             messageList.add(p);
         }
         return messageList;
@@ -35,12 +36,12 @@ public class MessageService {
     public Message findById(Long id) {
         Message message = repository.findById(id).orElse(null);
         if (message != null)
-            encryptComponent.decryptObject(message, EnumFactory.ASYMMETRIC);
+            encryptComponent.decryptObject(message, ASYMMETRIC);
         return message;
     }
 
     public Message save(Message message) {
-        encryptComponent.encryptObject(message, EnumFactory.ASYMMETRIC);
+        encryptComponent.encryptObject(message, ASYMMETRIC);
         return repository.save(message);
     }
 
