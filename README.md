@@ -33,8 +33,31 @@ para esse problema é usar uma combinação de criptografia simétrica e assimé
 
 ![Diagram](assets/asymmetric.png)
 
-### Instalação
+### Uso
 
-### Licença
+Utilize a anotação @EncryptField, determinando suas configurações (encryptField = TRUE, decryptField = TRUE)
 
-### Status do Projeto
+````
+public class Message {
+
+    @Id
+    private Long id;
+    @EncryptField(encryptField = TRUE, decryptField = TRUE)
+    private String messageField;
+
+}
+````
+
+Criptografia Simétrica
+
+````
+encryptObject(message, SYMMETRIC);
+decryptObject(message, SYMMETRIC);
+````
+
+Criptografia Assimétrica
+
+````
+encryptObject(message, ASYMMETRIC);
+decryptObject(message, ASYMMETRIC);
+````

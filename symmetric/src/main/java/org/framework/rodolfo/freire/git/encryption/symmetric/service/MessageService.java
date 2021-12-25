@@ -2,13 +2,14 @@ package org.framework.rodolfo.freire.git.encryption.symmetric.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.framework.rodolfo.freire.git.encryption.core.component.EncryptComponent;
-import org.framework.rodolfo.freire.git.encryption.core.factory.EnumFactory;
 import org.framework.rodolfo.freire.git.encryption.symmetric.document.Message;
 import org.framework.rodolfo.freire.git.encryption.symmetric.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.framework.rodolfo.freire.git.encryption.core.factory.EnumFactory.SYMMETRIC;
 
 @Slf4j
 @Service
@@ -26,7 +27,7 @@ public class MessageService {
     public List<Message> findAll() {
         List<Message> messageList = new ArrayList<>();
         for (Message p : repository.findAll()) {
-            encryptComponent.decryptObject(p, EnumFactory.SYMMETRIC);
+            encryptComponent.decryptObject(p, SYMMETRIC);
             messageList.add(p);
         }
         return messageList;
@@ -35,12 +36,12 @@ public class MessageService {
     public Message findById(Long id) {
         Message message = repository.findById(id).orElse(null);
         if (message != null)
-            encryptComponent.decryptObject(message, EnumFactory.SYMMETRIC);
+            encryptComponent.decryptObject(message, SYMMETRIC);
         return message;
     }
 
     public Message save(Message message) {
-        encryptComponent.encryptObject(message, EnumFactory.SYMMETRIC);
+        encryptComponent.encryptObject(message, SYMMETRIC);
         return repository.save(message);
     }
 
