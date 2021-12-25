@@ -27,8 +27,8 @@ public class MessageController {
         return messageService.save(message);
     }
 
-    @PatchMapping("/patch")
-    public Message up(@RequestBody Message message) {
+    @PutMapping
+    public Message update(@RequestBody Message message) {
         return messageService.save(message);
     }
 }
